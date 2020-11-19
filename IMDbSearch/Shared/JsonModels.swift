@@ -8,61 +8,52 @@
 import Foundation
 
 func fetchJson(search: String, completion: @escaping ([SearchResult]) -> Void) {
-    // print("**** fetchJson()")
-    // let urlString = "https://www.omdbapi.com/?s=guardians&type=movie&apikey=9e1e8711"
     let urlString = "https://www.omdbapi.com/?s=\(search)&type=movie&apikey=9e1e8711"
     guard let url = URL(string: urlString) else { return }
-    // print("**** url: \(url)")
-    URLSession.shared.dataTask(with: url) { data, response, error in
-        // print("response: \(response)")
-        // print("error: \(error)")
-        // print(data, response, error)
-        guard let data = data else { return }
-        // print("data: \(data)")
-        // let dataString = String(data: data, encoding: .utf8)
-        // print(dataString)
-        let searchResults = Bundle.main.decode(SearchResultJSON.self, from: data)
-        // print(searchResults.description)
-        // let convertedResults = searchResults.Search.forEach {
-        //     print($0.convertedResult)
-        // }
-        // let convertedResults =
-         DispatchQueue.main.async {
-            completion(searchResults.Search.map { $0.convertedResult })
-         }
-    }.resume()
+    SearchResultJSON.parse(from: url) { result in
+        DispatchQueue.main.async {
+            completion(result.Search.map { $0 as SearchResult })
+        }
+    }
+}
+
+enum ItemType {
+    case series
+    case movie
+    case episode
+    case game
+    case unknown(String)
+
+    static func from(string: String) -> ItemType {
+        switch string {
+            case "series":
+                return .series
+            case "movie":
+                return .movie
+            case "episode":
+                return .episode
+            case "game":
+                return .game
+            default:
+                return .unknown(string)
+        }
+    }
 }
 
 
+protocol SearchResult {
+    var title: String { get }
+    var year: String { get }
+    var id: String { get }
+    var type: ItemType { get }
+    var posterURL: URL? { get }
+}
 
-struct SearchResult {
-    enum ItemType: String {
-        case series
-        case movie
-        case episode
-        case game
 
-        static func from(string: String) -> ItemType? {
-            switch string {
-                case "series":
-                    return .series
-                case "movie":
-                    return .movie
-                case "episode":
-                    return .episode
-                case "game":
-                    return .game
-                default:
-                    return nil
-            }
-        }
+extension SearchResult {
+    var description: String {
+        return "SearchResult(title: \(title), year: \(year), id: \(id), type: \(type), posterURL: \(posterURL?.description ?? "nil")"
     }
-
-    let title: String
-    let year: String
-    let id: String
-    let type: ItemType?
-    let posterURL: URL?
 }
 
 
@@ -82,9 +73,26 @@ class SearchResultJSON: Codable {
     private var searchDescriptions: [String] {
         return Search.map { $0.description }
     }
+
+    static func parse(from url: URL, completion: @escaping (SearchResultJSON) -> Void) {
+        url.fetch {
+            completion(Bundle.main.decode(SearchResultJSON.self, from: $0))
+        }
+    }
 }
 
-class SingleSearchResultJSON: Codable {
+
+extension URL {
+    func fetch(completion: @escaping (Data) -> Void) {
+        URLSession.shared.dataTask(with: self) { data, response, error in
+            guard let data = data else { return }
+            completion(data)
+        }.resume()
+    }
+}
+
+
+class SingleSearchResultJSON: Codable, SearchResult {
     let Title: String
     let Year: String
     let imdbID: String
@@ -95,14 +103,11 @@ class SingleSearchResultJSON: Codable {
         return "Title: \(Title),\t Year: \(Year),\t ID: \(imdbID),\t Type: \(Type),\t Poster URL: \(Poster)"
     }
 
-    var convertedResult: SearchResult {
-        return SearchResult(
-                title: Title,
-                year: Year,
-                id: imdbID,
-                type: SearchResult.ItemType.from(string: Type),
-                posterURL: URL(string: Poster))
-    }
+    var title: String                   { return Title }
+    var year: String                    { return Year }
+    var id: String                      { return imdbID }
+    var type: ItemType                  { return .from(string: Type) }
+    var posterURL: URL?                 { return URL(string: Poster) }
 }
 
 

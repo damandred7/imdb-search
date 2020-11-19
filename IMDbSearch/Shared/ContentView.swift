@@ -12,7 +12,7 @@ struct ContentView: View {
         Button(
             action: {
                 fetchJson(search: "guardians") { results in
-                    results.forEach { print($0) }
+                    results.forEach { print($0.description) }
                 }
             },
             label: {
