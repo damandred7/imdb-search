@@ -26,7 +26,14 @@ struct ResultList: View {
 
     var body: some View {
         ForEach(results, id: \.id) { result in
-            Text(result.title)
+            VStack(alignment: .leading) {
+                Text(result.title)
+                    .font(.headline)
+                    .foregroundColor(.primary)
+                Text(result.year)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+            }
         }
     }
 }
