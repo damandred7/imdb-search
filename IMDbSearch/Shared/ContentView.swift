@@ -9,8 +9,20 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        Button(
+            action: {
+                fetchJson(search: "guardians") { results in
+                    results.forEach { print($0) }
+                }
+            },
+            label: {
+                Text("Search!")
+            })
+        .padding()
+
+
+        // Button("Hello, world!")
+            // .padding()
     }
 }
 

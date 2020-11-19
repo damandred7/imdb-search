@@ -15,6 +15,10 @@
 		991B937B256606CE00CC50DC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991B9350256606CA00CC50DC /* ContentView.swift */; };
 		991B937C256606CE00CC50DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 991B9351256606CE00CC50DC /* Assets.xcassets */; };
 		991B937D256606CE00CC50DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 991B9351256606CE00CC50DC /* Assets.xcassets */; };
+		991B939525660A8E00CC50DC /* JsonModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991B939425660A8E00CC50DC /* JsonModels.swift */; };
+		991B939625660A8E00CC50DC /* JsonModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991B939425660A8E00CC50DC /* JsonModels.swift */; };
+		991B939725660A8E00CC50DC /* JsonModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991B939425660A8E00CC50DC /* JsonModels.swift */; };
+		991B939825660A8E00CC50DC /* JsonModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991B939425660A8E00CC50DC /* JsonModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +53,7 @@
 		991B9371256606CE00CC50DC /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		991B9375256606CE00CC50DC /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		991B9377256606CE00CC50DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		991B939425660A8E00CC50DC /* JsonModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +106,7 @@
 				991B934F256606CA00CC50DC /* IMDbSearchApp.swift */,
 				991B9350256606CA00CC50DC /* ContentView.swift */,
 				991B9351256606CE00CC50DC /* Assets.xcassets */,
+				991B939425660A8E00CC50DC /* JsonModels.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -310,6 +316,7 @@
 			files = (
 				991B937A256606CE00CC50DC /* ContentView.swift in Sources */,
 				991B9378256606CE00CC50DC /* IMDbSearchApp.swift in Sources */,
+				991B939525660A8E00CC50DC /* JsonModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +326,7 @@
 			files = (
 				991B937B256606CE00CC50DC /* ContentView.swift in Sources */,
 				991B9379256606CE00CC50DC /* IMDbSearchApp.swift in Sources */,
+				991B939625660A8E00CC50DC /* JsonModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				991B936B256606CE00CC50DC /* Tests_iOS.swift in Sources */,
+				991B939725660A8E00CC50DC /* JsonModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				991B9376256606CE00CC50DC /* Tests_macOS.swift in Sources */,
+				991B939825660A8E00CC50DC /* JsonModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
