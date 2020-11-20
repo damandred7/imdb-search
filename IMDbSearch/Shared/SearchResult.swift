@@ -1,7 +1,7 @@
 import Foundation
 
 
-protocol SearchResult {
+public protocol SearchResult {
     var title: String { get }
     var year: String { get }
     var id: String { get }
@@ -17,7 +17,7 @@ extension SearchResult {
 }
 
 
-enum ItemType {
+public enum ItemType {
     case series
     case movie
     case episode

@@ -4,17 +4,14 @@ struct ContentView: View {
     @StateObject var manager = SearchManager()
 
     var body: some View {
-        VStack {
-            Button(
-                action: {
-                    manager.search(for: "guardians")
-                },
-                label: {
-                    Text("Search!")
-                })
-            .padding()
-            List {
-                ResultList(results: $manager.results)
+        NavigationView {
+            VStack {
+                Button(
+                    action: { manager.search(for: "guardians") },
+                    label: { Text("Search!") })
+                List {
+                    ResultList(manager: manager)
+                }
             }
         }
     }
@@ -22,18 +19,44 @@ struct ContentView: View {
 
 
 struct ResultList: View {
-    @Binding var results: [SearchResult]
+    @ObservedObject var manager: SearchManager
 
     var body: some View {
-        ForEach(results, id: \.id) { result in
+        ForEach(manager.results, id: \.result.id) { result in
+            TitleListItem(searchResult: result)
+        }
+    }
+}
+
+
+struct TitleListItem: View {
+    @ObservedObject var searchResult: SearchResultWithDetail
+
+    var body: some View {
+        NavigationLink(destination: TitleDetailView(searchResult: searchResult)) {
             VStack(alignment: .leading) {
-                Text(result.title)
+                Text(searchResult.result.title)
                     .font(.headline)
                     .foregroundColor(.primary)
-                Text(result.year)
+                Text(searchResult.result.year)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
+        }
+    }
+}
+
+
+struct TitleDetailView: View {
+    @ObservedObject var searchResult: SearchResultWithDetail
+
+    var body: some View {
+        List {
+            Text(searchResult.result.title)
+            Text(searchResult.detail?.year ?? "nil")
+        }
+        .onAppear {
+            searchResult.requestDetail()
         }
     }
 }

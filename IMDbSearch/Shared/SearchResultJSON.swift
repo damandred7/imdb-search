@@ -25,7 +25,7 @@ class SearchResultJSON: Codable {
 }
 
 
-class SingleSearchResultJSON: Codable, SearchResult {
+class SingleSearchResultJSON: Codable {
     let Title: String
     let Year: String
     let imdbID: String
@@ -35,10 +35,13 @@ class SingleSearchResultJSON: Codable, SearchResult {
     var description: String {
         return "Title: \(Title),\t Year: \(Year),\t ID: \(imdbID),\t Type: \(Type),\t Poster URL: \(Poster)"
     }
+}
 
-    var title: String                   { return Title }
-    var year: String                    { return Year }
-    var id: String                      { return imdbID }
-    var type: ItemType                  { return .from(string: Type) }
-    var posterURL: URL?                 { return URL(string: Poster) }
+
+extension SingleSearchResultJSON: SearchResult {
+    public var title: String                   { return Title }
+    public var year: String                    { return Year }
+    public var id: String                      { return imdbID }
+    public var type: ItemType                  { return .from(string: Type) }
+    public var posterURL: URL?                 { return URL(string: Poster) }
 }
