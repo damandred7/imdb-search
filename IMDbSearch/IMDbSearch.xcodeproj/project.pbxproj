@@ -147,8 +147,6 @@
 			isa = PBXGroup;
 			children = (
 				991B934E256606CA00CC50DC /* Shared */,
-				991B934F256606CA00CC50DC /* IMDbSearchApp.swift */,
-				991B93B42566208F00CC50DC /* SearchManager.swift */,
 				991B9358256606CE00CC50DC /* iOS */,
 				991B935F256606CE00CC50DC /* macOS */,
 				991B9369256606CE00CC50DC /* Tests iOS */,
@@ -160,6 +158,8 @@
 		991B934E256606CA00CC50DC /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				991B934F256606CA00CC50DC /* IMDbSearchApp.swift */,
+				991B93B42566208F00CC50DC /* SearchManager.swift */,
 				994245B5256772C30074A2D1 /* ImageLoader.swift */,
 				991B9351256606CE00CC50DC /* Assets.xcassets */,
 				9942459925676D2C0074A2D1 /* Extensions */,
