@@ -61,6 +61,19 @@ public enum RatingSource {
     case metacritic
     case unknown(String)
 
+    var description: String {
+        switch self {
+            case .imdb:
+                return "IMDB"
+            case .rottenTomatoes:
+                return "Rotten Tomatoes"
+            case .metacritic:
+                return "Metacritic"
+            case .unknown(let string):
+                return string
+        }
+    }
+
     static func from(string: String) -> RatingSource {
         switch string {
             case "Internet Movie Database":
