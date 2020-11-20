@@ -1,19 +1,8 @@
 import Foundation
 
+
 extension Bundle {
-    func decode<T: Decodable>(_ type: T.Type, from file: String, dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .deferredToDate, keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy = .useDefaultKeys) -> T {
-        guard let url = self.url(forResource: file, withExtension: nil) else {
-            fatalError("Failed to locate \(file) in bundle.")
-        }
-
-        guard let data = try? Data(contentsOf: url) else {
-            fatalError("Failed to load \(file) from bundle.")
-        }
-
-        return decode(type, from: data)
-    }
-
-    func decode<T: Decodable>(_ type: T.Type, from data: Data, dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .deferredToDate, keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy = .useDefaultKeys) -> T {
+    func decode<T: Decodable>(_ type: T.Type, from data: Data, dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .deferredToDate, keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy = .useDefaultKeys) -> T? {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = dateDecodingStrategy
         decoder.keyDecodingStrategy = keyDecodingStrategy
@@ -21,15 +10,20 @@ extension Bundle {
         do {
             return try decoder.decode(T.self, from: data)
         } catch DecodingError.keyNotFound(let key, let context) {
-            fatalError("Failed to decode from bundle due to missing key '\(key.stringValue)' not found – \(context.debugDescription)")
+            print("Failed to decode from bundle due to missing key '\(key.stringValue)' not found – \(context.debugDescription)")
+            return nil
         } catch DecodingError.typeMismatch(_, let context) {
-            fatalError("Failed to decode from bundle due to type mismatch – \(context.debugDescription)")
+            print("Failed to decode from bundle due to type mismatch – \(context.debugDescription)")
+            return nil
         } catch DecodingError.valueNotFound(let type, let context) {
-            fatalError("Failed to decode from bundle due to missing \(type) value – \(context.debugDescription)")
+            print("Failed to decode from bundle due to missing \(type) value – \(context.debugDescription)")
+            return nil
         } catch DecodingError.dataCorrupted(_) {
-            fatalError("Failed to decode from bundle because it appears to be invalid JSON")
+            print("Failed to decode from bundle because it appears to be invalid JSON")
+            return nil
         } catch {
-            fatalError("Failed to decode from bundle: \(error.localizedDescription)")
+            print("Failed to decode from bundle: \(error.localizedDescription)")
+            return nil
         }
     }
 }

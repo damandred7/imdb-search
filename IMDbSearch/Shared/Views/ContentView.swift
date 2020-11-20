@@ -6,13 +6,12 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            VStack {
-                Button(
-                    action: { manager.search(for: "guardians") },
-                    label: { Text("Search!") })
+            VStack(alignment: .leading) {
+                TextField("Search for a movie...", text: $manager.searchText)
+                    .padding()
                 ResultList(manager: manager)
             }
-            .navigationTitle("Search for a movie")
+            .navigationTitle("IMDB Movie Search")
         }
     }
 }

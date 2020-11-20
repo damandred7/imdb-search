@@ -60,7 +60,8 @@ class TitleDetailJSON: Codable {
 
     static func parse(from url: URL, completion: @escaping (TitleDetailJSON) -> Void) {
         url.fetch {
-            completion(Bundle.main.decode(TitleDetailJSON.self, from: $0))
+            guard let result = Bundle.main.decode(TitleDetailJSON.self, from: $0) else { return }
+            completion(result)
         }
     }
 }

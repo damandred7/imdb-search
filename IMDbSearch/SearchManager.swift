@@ -5,6 +5,11 @@ import SwiftUI
 public class SearchManager: ObservableObject {
     @Published public var results = [SearchResultWithDetail]()
     static internal var KeyString = "9e1e8711"
+    @Published public var searchText = "" {
+        didSet {
+            search(for: searchText)
+        }
+    }
 
     public func search(for searchString: String) {
         guard let url = buildSearchURL(search: searchString) else { return }
@@ -36,7 +41,6 @@ public class SearchResultWithDetail: ObservableObject {
         TitleDetailJSON.parse(from: url) { result in
             DispatchQueue.main.async {
                 self.detail = result as TitleDetail
-                print(self.detail?.description ?? "nil")
             }
         }
     }

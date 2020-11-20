@@ -19,7 +19,8 @@ class SearchResultJSON: Codable {
 
     static func parse(from url: URL, completion: @escaping (SearchResultJSON) -> Void) {
         url.fetch {
-            completion(Bundle.main.decode(SearchResultJSON.self, from: $0))
+            guard let result = Bundle.main.decode(SearchResultJSON.self, from: $0) else { return }
+            completion(result)
         }
     }
 }
