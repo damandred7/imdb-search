@@ -1,6 +1,7 @@
 import SwiftUI
 
 
+/// Shows detail for a single movie
 struct TitleDetailView: View {
     @ObservedObject var searchResult: SearchResultWithDetail
     var yearText: String {

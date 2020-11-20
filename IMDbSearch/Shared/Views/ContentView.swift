@@ -1,6 +1,7 @@
 import SwiftUI
 
 
+/// The main content of the app. A search field and a list of results.
 struct ContentView: View {
     @StateObject var manager = SearchManager()
 

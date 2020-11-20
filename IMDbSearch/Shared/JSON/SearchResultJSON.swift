@@ -1,5 +1,7 @@
 import Foundation
 
+
+/// A representation of a known JSON object for OMDb API search results
 class SearchResultJSON: Codable {
     let Search: [SingleSearchResultJSON]
     let totalResults: String
@@ -26,6 +28,7 @@ class SearchResultJSON: Codable {
 }
 
 
+/// A representation of a known JSON object for OMDb API single search result
 class SingleSearchResultJSON: Codable {
     let Title: String
     let Year: String

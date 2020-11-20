@@ -2,6 +2,7 @@ import Foundation
 
 
 extension Bundle {
+    /// Decode into a known JSON type
     func decode<T: Decodable>(_ type: T.Type, from data: Data, dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .deferredToDate, keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy = .useDefaultKeys) -> T? {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = dateDecodingStrategy

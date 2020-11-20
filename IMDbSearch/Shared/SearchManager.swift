@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 
 
+/// Manager search requests, results, and detail (indirectly)
 public class SearchManager: ObservableObject {
     @Published public var results = [SearchResultWithDetail]()
     static internal var KeyString = "9e1e8711"
@@ -27,10 +28,10 @@ public class SearchManager: ObservableObject {
 }
 
 
+/// Store a single search result and load detail for that result as requested
 public class SearchResultWithDetail: ObservableObject {
     @Published var result: SearchResult
     @Published var detail: TitleDetail?
-    @Published var detailRequested = false
 
     public init(result: SearchResult) {
         self.result = result

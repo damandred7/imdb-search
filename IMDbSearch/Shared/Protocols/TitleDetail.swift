@@ -1,6 +1,7 @@
 import Foundation
 
 
+/// Represents the detail of a single movie title
 public protocol TitleDetail {
     var title: String { get }
     var year: String { get }
@@ -42,6 +43,7 @@ extension TitleDetail {
 }
 
 
+/// Represents a single rating. e.g. Rotten Tomatoes, 55%
 public protocol Rating {
     var source: RatingSource { get }
     var value: String { get }
@@ -55,6 +57,7 @@ extension Rating {
 }
 
 
+/// Enumerates known rating sources. Not yet used.
 public enum RatingSource {
     case imdb
     case rottenTomatoes

@@ -2,6 +2,9 @@ import Foundation
 import SwiftUI
 
 
+/// SwiftUI placeholder for image that loads asynchronously. It will be shown
+/// when it's available.
+/// https://www.vadimbulavin.com/asynchronous-swiftui-image-loading-from-url-with-combine-and-swift/
 struct AsyncImage<Placeholder: View>: View {
     @ObservedObject private var loader: ImageLoader
     private let placeholder: Placeholder?

@@ -1,6 +1,7 @@
 import SwiftUI
 
 
+/// Shows a list of search results
 struct ResultList: View {
     @ObservedObject var manager: SearchManager
 
@@ -12,6 +13,7 @@ struct ResultList: View {
 }
 
 
+/// Shows a single search result
 struct TitleListItem: View {
     @ObservedObject var searchResult: SearchResultWithDetail
 

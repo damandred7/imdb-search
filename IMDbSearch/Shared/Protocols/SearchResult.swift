@@ -1,6 +1,7 @@
 import Foundation
 
 
+/// Represents a single search result element
 public protocol SearchResult {
     var title: String { get }
     var year: String { get }
@@ -17,6 +18,7 @@ extension SearchResult {
 }
 
 
+/// For future use. This defines known types of titles.
 public enum ItemType {
     case series
     case movie

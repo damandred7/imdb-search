@@ -1,6 +1,7 @@
 import Foundation
 
 
+/// A representation of a known JSON object for OMDb API title record
 class TitleDetailJSON: Codable {
     let Title: String
     let Year: String
@@ -83,6 +84,7 @@ extension TitleDetailJSON: TitleDetail {
 }
 
 
+/// A representation of a known JSON object for OMDb API rating record for a title
 class RatingJSON: Codable {
     let Source: String
     let Value: String
