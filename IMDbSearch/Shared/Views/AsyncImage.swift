@@ -23,7 +23,6 @@ struct AsyncImage<Placeholder: View>: View {
                 Image(uiImage: loader.image!)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(height: 200)
                     .cornerRadius(5)
             }
             else {
